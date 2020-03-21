@@ -9,7 +9,7 @@ def test():
     """
     Just the stantandar test
     """
-    with open("grammar.lk", "r") as grammar_file:
+    with open("grammar.lark", "r") as grammar_file:
         grammar = grammar_file.read()
     parser = Parser(grammar, transformer=SpineTransform)
     promt = Console(parser,

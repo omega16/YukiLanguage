@@ -87,7 +87,7 @@ class Console:
 
         self.config_history(history,max_history,history_out)
 
-        with open("console_grammar.lk","r") as console_grammar:
+        with open("console_grammar.lark","r") as console_grammar:
             self.console_parser = Lark(console_grammar, parser='lalr', start = "command",
                                     maybe_placeholders=True)
 
