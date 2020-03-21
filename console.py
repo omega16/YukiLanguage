@@ -1,9 +1,12 @@
+"""
+Console interfaze
+"""
 import datetime
-from _io import TextIOWrapper
 from collections import deque
-from lark import UnexpectedInput,UnexpectedCharacters,UnexpectedToken
+from _io import TextIOWrapper
+from lark import UnexpectedInput, UnexpectedCharacters, UnexpectedToken
 import curses
-from lark import Lark,Tree,Transformer
+from lark import Lark, Tree, Transformer
 
 class ConsoleTransformer(Transformer):
     def __init__(self,console,*args):

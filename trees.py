@@ -1,42 +1,56 @@
-
+"""
+All the trees neded on the package.
+"""
 class TreeError(Exception):
-    pass
+    """
+    Usually all of exceptions on module are inherits from just one class
+    """
 
 class AddNonTreeNodeAsNodeError(TreeError):
-    pass
+    """
+    Only nodes can be append to nodes.
+    """
 
 
 class BTree():
-    def __init__(self,data,parent=None,left=None,right=None):
+    """
+    Binary tree implementation
+    """
+    def __init__(self, data, parent=None, left=None, right=None):
         self.data = data
-        if self.check_type(parent): self.parent=parent
-        else : raise AddNonTreeNodeAsNodeError()
+        self.add_node(parent, "p")
+        self.add_node(left, "l")
+        self.add_node(right, "r")
 
-        if self.check_type(left): 
-            self.left=left
-            if left: self.left.parent=self
-        else : raise AddNonTreeNodeAsNodeError()
 
-        if self.check_type(right):
-            self.right=right
-            if right: self.right.parent = self
-        else : raise AddNonTreeNodeAsNodeError()
-
-    def check_type(self,tree):
-        if isinstance(tree,BTree) or (tree is None): return True
-        return False
+    def add_node(self, tree, kind_flag):
+        """
+        Just check the type
+        """
+        if isinstance(tree, BTree) or (tree is None):
+            if kind_flag == "p":
+                self.parent = tree
+            elif kind_flag == "l":
+                self.left = tree
+            elif kind_flag == "r":
+                self.right = tree
+            return
+        raise AddNonTreeNodeAsNodeError("with type {}".format(type(tree)))
 
     def __str__(self):
-        return "BTree({},{},{})".format(self.data,str(self.left),str(self.right))
+        return "BTree({},{},{})".format(self.data, str(self.left), str(self.right))
 
 
     def get_left_most(self):
+        """
+        returns most left leaft of tree
+        """
         nod = self
-        while(nod):
+        while nod:
             if nod:
                 old = nod
                 nod = nod.left
-            else : 
+            else:
                 break
         return old
 
@@ -73,7 +87,7 @@ class BTree():
                 remain.append(current.right)
             if current.right :
                 remain.append(current.left)
-        
+
 
 
     def pos_traverse_rec(self,f,state):
